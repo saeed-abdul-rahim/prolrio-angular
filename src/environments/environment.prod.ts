@@ -30,13 +30,13 @@ export const environment = {
     userAnalytics: 'userAnalytics'
   },
   firebase: {
-    apiKey: 'AIzaSyCOfIr-MjXFeAchIcoFT0gSM3tnq6ioRQo',
-    authDomain: 'prolrio.firebaseapp.com',
-    databaseURL: 'https://prolrio.firebaseio.com',
-    projectId: 'prolrio',
-    storageBucket: 'prolrio.appspot.com',
-    messagingSenderId: '526633178149',
-    appId: '1:526633178149:web:f737db9ae3d302553b1bcc',
-    measurementId: 'G-ZBK226YHGG'
+    apiKey: 'AIzaSyD6qOoV616bJkRayaXoTAWC6GPjUo71Q5o',
+    authDomain: 'prolrio-dev.firebaseapp.com',
+    databaseURL: 'https://prolrio-dev.firebaseio.com',
+    projectId: 'prolrio-dev',
+    storageBucket: 'prolrio-dev.appspot.com',
+    messagingSenderId: '133992017229',
+    appId: '1:133992017229:web:2daa193841b7475a5e9b04',
+    measurementId: 'G-B6D5K5L98B'
   }
 };
