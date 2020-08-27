@@ -1,7 +1,7 @@
 {
   "hosting": [
     {
-      "target": "prolrio",
+      "target": "prolrio-dev",
       "public": "dist/prolrio",
       "ignore": [
         "firebase.json",

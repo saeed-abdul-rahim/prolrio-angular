@@ -1,9 +1,9 @@
 {
   "targets": {
-    "prolrio": {
+    "prolrio-dev": {
       "hosting": {
-        "prolrio": [
-          "prolrio"
+        "prolrio-dev": [
+          "prolrio-dev"
         ]
       }
     }

@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
   name: 'PROLR',
-  url: 'https://prolr.io',
+  url: 'https://prolrio-dev.web.app',
   localStorageKey: 'oTM680-1SL5f2ecf06iDyLSMT6iDYm62d7bc',
-  stripeKey: 'pk_live_51HBzfQDqIzvTueD2MYXtv0ndPAvALyjuIRm1hkgVNxzurPWO0zFGXCI6CxArX5GkWyRTwyquEiHE3RQ4c8oqkgDe00twcZy4kW',
+  stripeKey: 'pk_test_51HBzfQDqIzvTueD2C7EqTEwscinYXsvEPvvftgeRP6gvbutfYiso9KVp7cKYgauKNkU0NsluxJmitGTlQsKS4Ggs008cbImU8W',
   api: {
     url: 'https://asia-east2-prolrio.cloudfunctions.net/api/v1',
     _user: '/user',
@@ -30,13 +30,13 @@ export const environment = {
     userAnalytics: 'userAnalytics'
   },
   firebase: {
-    apiKey: 'AIzaSyCOfIr-MjXFeAchIcoFT0gSM3tnq6ioRQo',
-    authDomain: 'prolrio.firebaseapp.com',
-    databaseURL: 'https://prolrio.firebaseio.com',
-    projectId: 'prolrio',
-    storageBucket: 'prolrio.appspot.com',
-    messagingSenderId: '526633178149',
-    appId: '1:526633178149:web:f737db9ae3d302553b1bcc',
-    measurementId: 'G-ZBK226YHGG'
+    apiKey: 'AIzaSyD6qOoV616bJkRayaXoTAWC6GPjUo71Q5o',
+    authDomain: 'prolrio-dev.firebaseapp.com',
+    databaseURL: 'https://prolrio-dev.firebaseio.com',
+    projectId: 'prolrio-dev',
+    storageBucket: 'prolrio-dev.appspot.com',
+    messagingSenderId: '133992017229',
+    appId: '1:133992017229:web:2daa193841b7475a5e9b04',
+    measurementId: 'G-B6D5K5L98B'
   }
 };
