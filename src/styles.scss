@@ -1,0 +1,462 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$my-app-primary: mat-palette($mat-blue);
+$my-app-accent: mat-palette($mat-grey);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent);
+@include angular-material-theme($my-app-theme);
+
+:root {
+    --transition-speed: 600ms;
+    --transition-speed-sm: 300ms;
+    --primary-color: hsl(217, 71%, 53%);
+    --secondary-color: hsl(217, 71%, 45%);
+}
+
+html {
+    background-color: var(--bg-color) !important;
+    transition: var(--transition-speed-sm);
+}
+
+body {
+    color: var(--text-primary) !important;
+    transition: var(--transition-speed-sm);
+}
+
+hr {
+    background-color: var(--text-primary) !important;
+    transition: var(--transition-speed-sm);
+}
+
+a:hover {
+    color: var(--element-bg-color-primary) !important;
+}
+
+$input-placeholder-color: var(--text-primary);
+@import "bulma";
+
+body::-webkit-scrollbar, .mat-dialog-content::-webkit-scrollbar, .mat-tab-header::-webkit-scrollbar {
+    width: 0.25rem !important;
+    height: 0.15rem !important;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.breadcrumb ul::-webkit-scrollbar, .breadcrumb ol::-webkit-scrollbar {
+    height: 0rem !important;
+}
+
+body::-webkit-scrollbar-track, .mat-dialog-content::-webkit-scrollbar-track, .mat-tab-header::-webkit-scrollbar-track, .breadcrumb ul::-webkit-scrollbar-track, .breadcrumb ol::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+body::-webkit-scrollbar-thumb, .mat-dialog-content::-webkit-scrollbar-thumb, .mat-tab-header::-webkit-scrollbar-thumb, .breadcrumb ul::-webkit-scrollbar, .breadcrumb ol::-webkit-scrollbar {
+    background: var(--secondary-color) !important;
+}
+
+.logo {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    letter-spacing: 0.3ch;
+    transition: var(--transition-speed-sm);
+}
+
+.fa-primary {
+    color: var(--primary-color);
+}
+
+.fa-secondary {
+    color: var(--secondary-color);
+}
+
+.fa-primary-hover {
+    color: var(--primary-color);
+}
+
+.fa-primary-hover:hover {
+    color: whitesmoke;
+}
+
+.is-white {
+    color: whitesmoke;
+    transition: var(--transition-speed-sm);
+}
+
+::selection {
+    background: var(--primary-color);
+    color: #fff;
+}
+::-moz-selection {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--secondary-color);
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+video {
+    max-height: -webkit-fill-available;
+    max-height: -moz-available;
+}
+
+button {
+    transition: var(--transition-speed-sm);
+}
+
+.navbar {
+    background-color: var(--bg-color);
+    transition: var(--transition-speed-sm);
+}
+
+.success {
+    color: var(--success) !important;
+}
+
+.primary {
+    color: var(--primary) !important;
+}
+
+.info {
+    color: var(--info) !important;
+}
+
+.link {
+    color: var(--link) !important;
+}
+
+.warning {
+    color: var(--warning) !important;
+}
+
+.danger {
+    color: var(--danger) !important;
+}
+
+.success-bg {
+    background-color: var(--success) !important;
+}
+
+.primary-bg {
+    background-color: var(--primary) !important;
+}
+
+.info-bg {
+    background-color: var(--info) !important;
+}
+
+.link-bg {
+    background-color: var(--link) !important;
+}
+
+.warning-bg {
+    background-color: var(--warning) !important;
+}
+
+.danger-bg {
+    background-color: var(--danger) !important;
+}
+
+.secondary-bg {
+    background-color: var(--element-bg-color-secondary) !important;
+}
+
+.columns {
+    flex-wrap: wrap;
+}
+
+.content {
+    word-break: break-word;
+}
+
+.box {
+    border-radius: 0.75em;
+}
+
+.footer {
+    background-color: var(--bg-color) !important;
+}
+
+.box-btn {
+    cursor: pointer;
+    transition: var(--transition-speed-sm);
+}
+
+.mat-dialog-container {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary) !important;
+    transition: var(--transition-speed-sm) !important;
+}
+
+.card, .mat-snack-bar-container, .box, .tag, .tag:not(body), .pricing-plan, .pricing-header, .pricing-table .pricing-plan .plan-header, .pricing-table .pricing-plan .plan-price {
+    background-color: var(--element-bg-color) !important;
+    color: var(--text-secondary) !important;
+    transition: var(--transition-speed-sm) !important;
+}
+
+.pricing-table .pricing-plan {
+    border: .1rem solid var(--element-bg-color) !important;
+}
+
+.pricing-table .pricing-plan .plan-item {
+    background: inherit;
+    border-bottom: .1rem solid var(--element-bg-color);
+    color: var(--text-primary);
+}
+
+.pricing-table .pricing-plan .plan-price .plan-price-amount .plan-price-currency {
+    color: inherit;
+}
+
+.pricing-table {
+    box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+}
+
+.tag:hover {
+    background-color: var(--primary-color);
+}
+
+.dropdown-content, .dropdown-item {
+    background-color: var(--element-bg-color-secondary);
+    transition: var(--transition-speed-sm);
+}
+
+.dropdown-item, .option-tag {
+    color: var(--text-secondary);
+    transition: var(--transition-speed-sm);
+}
+
+a.dropdown-item:hover, button.dropdown-item:hover {
+    background-color: var(--element-bg-color);
+    color: var(--text-primary);
+    transition: var(--transition-speed-sm);
+}
+
+.dropdown:focus {
+    outline: none !important;
+}
+
+.dropdown {
+    transform: translateY(-25%);
+    -ms-transform: translateY(-25%);
+}
+
+.dropdown-menu {
+    transform: translateY(-50%);
+}
+
+.option-box {
+    padding: 0.5em;
+    border-radius: 0.5em;
+    background-color: transparent !important;
+    box-shadow: none;
+    transition: var(--transition-speed-sm);
+    cursor: pointer;
+}
+
+.option-box:hover {
+    box-shadow: 0 10px 16px rgba(0, 0, 0, .13), 0 6px 6px rgba(0, 0, 0, .19);
+}
+
+.box-shadow {
+    box-shadow: 0 10px 16px rgba(0, 0, 0, .13), 0 6px 6px rgba(0, 0, 0, .19);
+}
+
+.box-hover:hover {
+    box-shadow: 0 10px 16px rgba(0, 0, 0, .13), 0 6px 6px rgba(0, 0, 0, .19);
+}
+
+.options-tag:after {
+    content: '\2807';
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.is-horizontal-center {
+    justify-content: center;
+}
+
+.is-vh-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+is-centered-vertical {
+    display: flex;
+    align-items: center;
+}
+
+.vertical-align {
+    transform: translateY(50%);
+    -ms-transform: translateY(50%);
+}
+
+.right-align {
+    position: absolute;
+    right: 1em;
+}
+
+.loader {
+    margin: auto;
+}
+
+.is-transparent {
+    background-color: transparent;
+}
+
+.title, .mat-tab-label, .mat-tab-link, .breadcrumb li.is-active a, .mat-header-cell, .mat-paginator, .mat-paginator-page-size .mat-select-trigger, .mat-cell, .mat-footer-cell {
+    color: var(--text-primary);
+    transition: var(--transition-speed-sm);
+}
+
+.subtitle, .card-header-title {
+    color: var(--text-secondary);
+    transition: var(--transition-speed-sm);
+}
+
+.breadcrumb a {
+    color: var(--link-secondary);
+    transition: var(--transition-speed-sm);
+}
+
+.breadcrumb a:hover {
+    color: var(--link-primary);
+    transition: var(--transition-speed-sm);
+}
+
+.box-btn:hover {
+    transform: translate(0, -0.3em);
+}
+
+body .mat-typography, .mat-body, .mat-body-1, .mat-typography, .mat-dialog-title, .mat-tab-label, .mat-tab-link, .mat-tab-group, .mat-table, mat-paginator-container, .mat-header-cell {
+    font-size: 1em;
+    font-weight: 400;
+    line-height: 1.5;
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+    font: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+}
+
+.mat-typography h1, .mat-typography h2 {
+    font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+}
+
+.title {
+    line-height: 1.125 !important;
+}
+
+.subtitle {
+    line-height: 1.25 !important;
+}
+
+.mat-table {
+    width: 100%;
+}
+
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
+
+.mat-table, .mat-paginator-container {
+    background-color: var(--bg-color);
+    transition: var(--transition-speed-sm);
+}
+
+@media screen and (max-width: 1023px) {
+    .navbar-menu {
+        background-color: var(--element-bg-color-secondary);
+        transition: var(--transition-speed-sm);
+    }
+}
+
+.navbar-burger {
+    color: var(--text-secondary) !important;
+}
+
+.input, .textarea, .select, select, option {
+    background-color: var(--bg-color) !important;
+    color: inherit !important;
+    transition: var(--transition-speed-sm);
+}
+
+table td, table th {
+    vertical-align: inherit;
+}
+
+.a-danger {
+    color: var(--danger);
+    transition: var(--transition-speed-sm);
+}
+
+.a-danger:hover {
+    background-color: var(--danger) !important;
+    color: #fff !important;
+}
+
+
+.angular-editor-toolbar {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.angular-editor-button, .ae-picker-label, ae-picker, .ae-expanded .ae-picker-options, .ae-picker-item, .ae-picker-label::before {
+    background: var(--element-bg-color-secondary) !important;
+    background-color: var(--element-bg-color-secondary) !important;
+    border: 1px solid var(--element-bg-color-secondary) !important;
+    color: var(--text-primary);
+}
+
+.full-screen-modal .mat-dialog-container {
+    max-width: none;
+}
+
+.plyr {
+    display: inherit !important;
+}
+
+.pad-top0 {
+    padding-top: 0 !important;
+}
+
+.pad-bottom0 {
+    padding-bottom: 0 !important;
+}
+
+.margin0 {
+    margin: 0 !important;
+}
+
+.margin-bottom0 {
+    margin-bottom: 0 !important;
+}
+
+.margin-bottom05 {
+    margin-bottom: 0.5em !important;
+}
+
+.margin-top1 {
+    margin-top: 1em !important;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-left {
+    text-align: left;
+}

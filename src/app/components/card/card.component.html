@@ -1,0 +1,13 @@
+<div class="card box-btn">
+    <div class="card-image">
+        <figure class="image is-16by9">
+            <img *ngIf="contentType === 'video' || contentType === 'image'" src="{{url}}" alt="{{title}}">
+            <fa-icon *ngIf="contentType === 'video'" [icon]="faCaretRight" class="is-overlay is-vh-centered is-white" size="4x"></fa-icon>
+            <fa-icon *ngIf="!contentType || contentType === 'document'" [icon]="faFileAlt" size="4x" class="is-overlay is-vh-centered"></fa-icon>
+        </figure>
+    </div>
+    <div class="card-content">
+        <div class="title is-6">{{title}}</div>
+        <div class="content" [innerHTML]="body"></div>
+    </div>
+</div>

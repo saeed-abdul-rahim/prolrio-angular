@@ -1,0 +1,13 @@
+.breadcrumb {
+    padding-left: 1.5rem;
+}
+
+.breadcrumb ul, .breadcrumb ol {
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.breadcrumb li+li:before {
+    content: "\00BB";
+}

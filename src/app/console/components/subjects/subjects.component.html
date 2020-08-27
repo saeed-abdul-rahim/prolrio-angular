@@ -1,0 +1,43 @@
+<section class="section container">
+    <span class="title is-1 loader" *ngIf="entityLoader"></span>
+    <div>
+        <div class="title is-4">
+            Contents
+            <span *ngIf="role === 'admin' || showEdit" class="is-pulled-right">
+                <button *ngIf="orderChanged | async" class="button is-primary is-outlined is-small" (click)="saveEntities()" [ngClass]="loading ? 'is-loading' : ''" style="margin-right: 0.1em">
+                    <fa-icon [icon]="faSave"></fa-icon>
+                </button>
+                <button class="button is-warning is-outlined is-small" *ngIf="entityData && entityData.length > 0" (click)="toggleEdit()">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+            </span>
+        </div>
+        <div cdkDropList *ngIf="edit && !entityLoader && entityData && entityData.length > 0" class="columns is-desktop" (cdkDropListDropped)="drop($event)">
+            <div class="column is-12" *ngFor="let entity of entityData" cdkDrag>
+                <div class="box box-btn">
+                    <ng-template #entityMenu>
+                        <a class="dropdown-item a-danger" (click)="removeEntityDialog(entity.id, entity.title)">Delete</a>
+                    </ng-template>
+                    <app-dropdown [template]="entityMenu"></app-dropdown>
+                    <fa-icon [icon]="faExpand" size="xs" class="icon is-pulled-right"></fa-icon>
+                    <div (click)="navigateToEntity(entity.id, entity.title)">{{entity.title}}</div>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="!edit" class="columns" (scroll)="onScroll()">
+            <div class="column is-3" *ngFor="let entity of partialData">
+                <app-card 
+                    (click)="navigateToEntity(entity.id, entity.title)"
+                    [title]="entity.title"
+                    [body]="entity.description"
+                    [url]="entity.thumbnailImageUrl"
+                    [contentType]="entity.contentType">
+                </app-card>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section container" *ngIf="(page.data | async)?.length === 0">
+    <p>This subject is empty</p>
+    <p *ngIf="role === 'admin'">Create contents using the navigation menu</p>
+</section>

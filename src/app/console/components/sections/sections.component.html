@@ -1,0 +1,49 @@
+<div *ngIf="{sectionData: sectionData$ | async, subjectData: subjectData$ | async} as data">
+    <section class="section" *ngIf="!data.sectionData && !data.subjectData">
+        <span class="title is-1 loader"></span>
+    </section>
+    <section class="section" *ngIf="data.sectionData && data.sectionData.length > 0">
+        <div class="title is-4">
+            Course{{data.sectionData.length === 1 ? '' : 's'}}
+        </div>
+        <div class="columns">
+            <div class="column is-3" *ngFor="let section of data.sectionData;">
+                <div class="box box-btn" (click)="navigateToSection(section.id, section.sectionName)">
+                    <div *ngIf="role === 'admin'">
+                        <ng-template #sectionMenu>
+                            <a class="dropdown-item" (click)="updateSection(section.id, section.sectionName)">Update name</a>
+                            <a class="dropdown-item a-danger" (click)="removeSection(section.id, section.sectionName)">Delete</a>
+                        </ng-template>
+                        <app-dropdown [template]="sectionMenu"></app-dropdown>
+                    </div>
+                    {{section.sectionName}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section" *ngIf="data.subjectData && data.subjectData.length > 0" [ngClass]="data.sectionData && data.sectionData.length > 0 ? 'pad-top0' : ''">
+        <div class="title is-4">
+            Subject{{data.subjectData.length === 1 ? '' : 's'}}
+        </div>
+        <div class="columns">
+            <div class="column is-3" *ngFor="let subject of data.subjectData">
+                <div class="box box-btn" (click)="navigateToSubject(subject.id, subject.subjectName)">
+                    <div *ngIf="role === 'admin'">
+                        <ng-template #sectionMenu>
+                            <a class="dropdown-item" (click)="updateSubject(subject.id, subject.subjectName)">Update name</a>
+                            <a class="dropdown-item a-danger" (click)="removeSubject(subject.id, subject.subjectName)">Delete</a>
+                        </ng-template>
+                        <app-dropdown [template]="sectionMenu"></app-dropdown>
+                    </div>
+                    {{subject.subjectName}}
+                </div>
+            </div>
+        </div>
+    </section>
+    <section *ngIf="data.sectionData && data.subjectData && data.sectionData.length === 0 && data.subjectData.length === 0" class="section">
+        <div class="subtitle is-4">
+            <p>This section is empty.</p>
+            <p *ngIf="role==='admin'">Create a new section / subject using the navigation menu</p>
+        </div>
+    </section>
+</div>

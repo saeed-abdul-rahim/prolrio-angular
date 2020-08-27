@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Edit {{title}}</h2>
+<form [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <div class="field">
+            <div class="control">
+            <input class="input is-link" type="text" formControlName="title" placeholder="Title" required />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-dialog-close class="button is-dark is-link is-outlined">Cancel</button>
+      <button type="submit" cdkFocusInitial class="button is-dark is-link is-outlined" [ngClass]="{'is-loading': loading}">Update</button>
+    </mat-dialog-actions>
+  </form>

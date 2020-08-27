@@ -1,0 +1,14 @@
+<div class="container">
+    <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+        <div class="field">
+            <div class="control">
+                <input class="input" formControlName="otp" placeholder="Enter OTP">
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-fullwidth is-link" [ngClass]="{'is-loading': loading}">Sign In</button>
+            </div>
+        </div>
+    </form>
+</div>

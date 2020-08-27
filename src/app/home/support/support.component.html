@@ -1,0 +1,27 @@
+<div class="hero is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <h1 class="title"><b>We're ready to help!</b></h1>
+            <form class="box" [formGroup]="supportForm" (ngSubmit)="onSubmit()">
+                <div class="field is-grouped is-grouped-multiline">
+                    <div class="control">
+                        <input class="input" formControlName="name" type="text" placeholder="Name" required>
+                    </div>
+                    <div class="control">
+                        <input class="input" formControlName="email" type="email" placeholder="Email" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <textarea class="textarea" formControlName="message" placeholder="Describe your issue" required></textarea>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control align-right">
+                        <button type="submit" class="button is-link" [ngClass]="loading ? 'is-loading' : ''">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

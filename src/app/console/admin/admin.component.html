@@ -1,0 +1,11 @@
+<div *ngIf="metadata">
+    <div *ngIf="metadata.subscriptionStatus === 'active' || metadata.subscriptionStatus === 'past_due'">
+        <span *ngIf="metadata.subscriptionStatus === 'past_due'" class="tag is-danger is-pulled-right">Payment Failed</span>
+        <router-outlet></router-outlet>
+    </div>
+    <section class="section" *ngIf="metadata.subscriptionStatus === 'unpaid' || metadata.subscriptionStatus === 'cancelled'">
+        <div class="card box has-text-centered">
+            Subscription Expired
+        </div>
+    </section>
+</div>

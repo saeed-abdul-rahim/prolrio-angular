@@ -1,0 +1,64 @@
+<form [formGroup]="addUserForm" (ngSubmit)="onAddUserSubmit()">
+    <section class="section">
+        <div class="field has-addons">
+            <p class="control" *ngIf="emailPhone === 'phone'">
+                <span class="select">
+                    <select formControlName="callCode" #selectedRole>
+                        <option *ngFor="let code of callingCodes" [attr.value]="code.callingCode" [attr.selected]="countryCode && countryCode === code.code ? true : null">{{code.callingCode}}</option>
+                    </select>
+                </span>
+            </p>
+            <p class="control">
+                <input class="input" formControlName="email" type="text" placeholder="Email / Phone" required (ngModelChange)="charOrNumber($event)">
+            </p>
+        </div>
+        <div class="field">
+            <div class="control">
+                <div class="select is-link">
+                    <select formControlName="role" required>
+                        <option value="none" [attr.selected]="true" hidden>Select Role</option>
+                        <option *ngFor="let role of displayRoleMap | keyvalue" value="{{role.key}}">{{role.value}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button type="submit" cdkFocusInitial class="button is-dark is-link is-fullwidth" [ngClass]="{'is-loading': loading}">Create</button>
+            </div>
+        </div>
+    </section>
+</form>
+<div class="section pad-top0" *ngIf="userRequests">
+    <div *ngIf="userRequests.length > 0">
+        <div class="title is-5">Pending Requests</div>
+        <div class="card margin-top1" *ngFor="let user of userRequests">
+            <div class="card-content columns has-text-centered">
+                <div class="column">
+                    <div class="content">
+                        {{user.name}}
+                        <br *ngIf="user.name">{{user.email}}
+                        <br *ngIf="user.email">{{user.phone && user.phone !== '0' ? user.phone : ''}}
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="field">
+                        <div class="control">
+                            <div class="select is-link">
+                                <select #selectedRole required>
+                                    <option value="none" [attr.selected]="true" hidden>Select Role</option>
+                                    <option *ngFor="let role of displayRoleMap | keyvalue" value="{{role.key}}">{{role.value}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="card-footer">
+                <div *ngIf="user.loading" class="title loader"></div>
+                <button *ngIf="!user.loading" class="button button-card-footer card-footer-item has-text-danger" (click)="rejectRequest(user.uid)">Reject</button>
+                <button *ngIf="!user.loading" class="button button-card-footer card-footer-item has-text-info" (click)="acceptRequest(user.uid, selectedRole.value)">Accept</button>
+            </footer>
+        </div>
+    </div>
+</div>

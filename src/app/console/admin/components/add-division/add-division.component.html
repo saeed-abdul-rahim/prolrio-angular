@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Create Course / Subject</h2>
+<form [formGroup]="createDivForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <div class="field is-size-7">
+            Courses can have infinite depth (behaves like folders).
+            <br>Subjects can only contain content (videos, images etc.)
+        </div>
+        <div class="field">
+            <div class="control">
+                <div class="select is-link">
+                    <select formControlName="division" required>
+                        <option value="course">Course</option>
+                        <option value="subject" [attr.selected]="true">Subject</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input formControlName="name" class="input" type="text" placeholder="{{createDivControls && createDivControls.division && createDivControls.division.value ? toTitle(createDivControls.division.value) : 'Subject'}} Name">
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-dialog-close class="button is-dark is-link is-outlined">Cancel</button>
+        <button type="submit" cdkFocusInitial class="button is-dark is-link" [ngClass]="{'is-loading': loading}">Create</button>
+    </mat-dialog-actions>
+</form>

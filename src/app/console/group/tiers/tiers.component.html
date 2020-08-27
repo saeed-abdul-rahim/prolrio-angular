@@ -1,0 +1,124 @@
+<span class="title is-1 loader" *ngIf="invoiceLoading"></span>
+<div *ngIf="user && invoice && user.tierId === payAsYouGo.tierId">
+  <span class="title is-6">Bill Amount</span>
+  <div class="box card">
+    <div class="card-header-title">
+      <div *ngIf="!exchangeRate">
+        INR ₹ <div class="title">{{invoice.amount / 100 | number }}</div>
+      </div>
+      <div *ngIf="exchangeRate">
+        <div class="title">{{invoice.amount / 100 * exchangeRate | currency: currencyCode }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<span class="title is-1 loader" *ngIf="cardLoading"></span>
+<div *ngIf="cards">
+  <div class="columns">
+    <div class="column" *ngFor="let card of cards">
+      <div class="box card">
+        <div *ngIf="removeCardLoading" class="loader is-pulled-right"></div>
+        <ng-template #cardMenu>
+          <a class="dropdown-item" (click)="addCardDialog()">Change card</a>
+          <a class="dropdown-item a-danger" (click)="removeCard(card.id)">Delete</a>
+        </ng-template>
+        <app-dropdown [template]="cardMenu" *ngIf="!removeCardLoading"></app-dropdown><br><br>
+        <div class="card-header-title is-pulled-right">
+          <fa-icon *ngIf="card.card.brand === 'mastercard'" [icon]="faMasterCard" size="3x" class="fa-primary"></fa-icon>
+          <fa-icon *ngIf="card.card.brand === 'visa'" [icon]="faVisa" size="3x" class="fa-primary"></fa-icon>
+          <fa-icon *ngIf="card.card.brand === 'amex'" [icon]="faAmex" size="3x" class="fa-primary"></fa-icon>
+          <fa-icon *ngIf="card.card.brand === 'diners'" [icon]="faDinersClub" size="3x" class="fa-primary"></fa-icon>
+          <fa-icon *ngIf="card.card.brand === 'discover'" [icon]="faDiscover" size="3x" class="fa-primary"></fa-icon>
+          <fa-icon *ngIf="card.card.brand === 'jcb'" [icon]="faJcb" size="3x" class="fa-primary"></fa-icon>
+          <fa-icon *ngIf="card.card.brand === 'unionpay' || card.brand === 'unknown'" [icon]="faCard" size="3x" class="fa-primary"></fa-icon>
+        </div>
+        <div class="card-header-title">
+          {{card.billing_details.name}}
+          <br>**** {{card.card.last4}}
+        </div>
+        <div class="card-content">
+          <span class="is-pulled-right">{{card.card.exp_month}} / {{card.card.exp_year}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="title is-6">Tiers</div>
+<div class="pricing-table is-comparative" *ngIf="user && tiers">
+  <div class="pricing-plan is-features">
+    <div class="plan-header">Features</div>
+    <div class="plan-price"><span class="plan-price-amount">&nbsp;</span></div>
+    <div class="plan-items">
+      <div class="plan-item">Institutions</div>
+      <div class="plan-item">Courses</div>
+      <div class="plan-item">Subjects</div>
+      <div class="plan-item">Users</div>
+      <div class="plan-item">Storage</div>
+    </div>
+    <div class="plan-footer">
+    </div>
+  </div>
+  <div class="pricing-plan" *ngIf="free">
+    <div class="plan-header">{{free.name}}</div>
+    <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">{{currencySymbol ? currencySymbol : '₹'}}</span>0</span></div>
+    <div class="plan-items">
+      <div class="plan-item" data-feature="Institutions">{{free.group.allowed}}</div>
+      <div class="plan-item" data-feature="Courses">{{free.section.allowed}}</div>
+      <div class="plan-item" data-feature="Subjects">{{free.subject.allowed}}</div>
+      <div class="plan-item" data-feature="Users">{{free.user.allowed}}</div>
+      <div class="plan-item" data-feature="Storage">{{free.storage.allowed}} GB</div>
+    </div>
+    <div class="plan-footer">
+      <button class="button is-fullwidth is-link is-outlined" [ngClass]="cancelSubLoading ? 'is-loading' : ''" [attr.disabled]="user.tierId === free.tierId ? 'disabled' : null" (click)="cancelSubscrption()">
+        <span *ngIf="user.tierId === free.tierId">Current plan</span>
+        <span *ngIf="user.tierId !== free.tierId">Free Tier</span>
+      </button>
+    </div>
+  </div>
+  <div class="pricing-plan is-link" *ngIf="payAsYouGo">
+    <div class="plan-header">{{payAsYouGo.name}}</div>
+    <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency"></span>Variable</span></div>
+    <div class="plan-items" *ngIf="!exchangeRate">
+      <div class="plan-item" data-feature="Institutions">
+        Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.group.amount}} / institution
+      </div>
+      <div class="plan-item" data-feature="Courses">
+        Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.section.amount}} / section
+      </div>
+      <div class="plan-item" data-feature="Subjects">
+        Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.subject.amount}} / subject
+      </div>
+      <div class="plan-item" data-feature="Users">
+        Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.user.amount}} / user
+      </div>
+      <div class="plan-item" data-feature="Storage">
+        Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.storage.amount}} / GB stored
+      </div>
+    </div>
+    <div class="plan-items" *ngIf="exchangeRate">
+      <div class="plan-item" data-feature="Institutions">
+        Free + <span class="plan-price-currency"></span>{{payAsYouGo.group.amount * exchangeRate | currency: currencyCode}} / institution
+      </div>
+      <div class="plan-item" data-feature="Courses">
+        Free + <span class="plan-price-currency"></span>{{payAsYouGo.section.amount * exchangeRate | currency: currencyCode}} / section
+      </div>
+      <div class="plan-item" data-feature="Subjects">
+        Free + <span class="plan-price-currency"></span>{{payAsYouGo.subject.amount * exchangeRate | currency: currencyCode}} / subject
+      </div>
+      <div class="plan-item" data-feature="Users">
+        Free + <span class="plan-price-currency"></span>{{payAsYouGo.user.amount * exchangeRate | currency: currencyCode}} / user
+      </div>
+      <div class="plan-item" data-feature="Storage">
+        Free + <span class="plan-price-currency"></span>{{payAsYouGo.storage.amount * exchangeRate | currency: currencyCode}} / GB stored
+      </div>
+    </div>
+    <div class="plan-footer">
+      <button class="button is-fullwidth" [ngClass]="createSubLoading ? 'is-loading' : ''" [attr.disabled]="user.tierId === payAsYouGo.tierId ? 'disabled' : null" (click)="subscriptionFlow(payAsYouGo.tierId)">
+        <span *ngIf="user.tierId === payAsYouGo.tierId">Current Tier</span>
+        <span *ngIf="user.tierId !== payAsYouGo.tierId">Unlock</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="title">Create Institution</div>
+    <div class="card">
+        <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+            <div class="card-content">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" formControlName="name" type="text" placeholder="Institution Name">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="control">
+                        <input class="input" formControlName="id" type="text" placeholder="Institution ID" [ngClass]="groupFormControls.id.touched && groupFormControls.id.invalid ? 'is-danger' : ''">
+                        <span class="is-size-7 has-text-danger" *ngIf="groupFormControls.id.touched && groupFormControls.id.invalid">ID should have a minimum of 5 characters and can only contain any of alphabets, digits, hyphen(-) or underscore(_)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="button is-dark is-link is-outlined" [ngClass]="{'is-loading': loading}">Create</button>
+            </div>
+        </form>
+    </div>
+</div>

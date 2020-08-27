@@ -1,0 +1,12 @@
+<div class="is-right dropdown is-pulled-right" tabindex="0" [ngClass]="open ? 'is-active' : ''"  (click)="$event.preventDefault(); $event.stopPropagation(); open = !open" (blur)="open = false">
+    <div class="dropdown-trigger">
+        <div class="box option-box" aria-haspopup="true" aria-controls="dropdown-menu7">
+            <span class="options-tag"></span>
+        </div>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu7" role="menu">
+        <div class="dropdown-content">
+            <ng-container [ngTemplateOutlet]="template"></ng-container>
+        </div>
+    </div> 
+</div>

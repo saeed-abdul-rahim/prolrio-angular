@@ -1,0 +1,63 @@
+<h2 class="delete is-large" mat-dialog-close></h2>
+<h2 mat-dialog-title>{{level === 'admin' ? 'Home' : ((section && section.sectionName) || (subject && subject.subjectName)) }}</h2>
+<mat-dialog-content>
+    <mat-tab-group [(selectedIndex)]="selectedIndex" mat-align-tabs="center">
+        <mat-tab label="Add new user">
+            <app-add-user [dialogRef]="dialogRef"></app-add-user>
+        </mat-tab>
+        <mat-tab label="All Users">
+            <section class="section"  *ngIf="!allUsers">
+                <span class="title is-1 loader"></span>
+            </section>
+            <section class="section has-text-centered" *ngIf="(allUsers && allUsers.length === 0) || (level === 'division' && !addToDivision && users && users.length === 0)">
+                No users found<br>
+            </section>
+            <div *ngIf="((level === 'admin' || addToDivision) && allUsers && allUsers.length > 0) || ((level === 'division' && !addToDivision) && users && users.length > 0)">
+                <div class="field">
+                    <div class="control has-icons-left">
+                        <input class="input is-link" type="text" (keyup)="applyFilter($event)" placeholder="Search" #input />
+                        <span class="icon is-left">
+                            <fa-icon [icon]="faSearch" size="sm" class="fa-primary"></fa-icon>
+                        </span>
+                    </div>
+                </div>
+                <table mat-table [dataSource]="tableData">
+                    <ng-container matColumnDef="User Details">
+                        <td mat-cell *matCellDef="let row">
+                            <ng-template #userMenu>
+                                <a *ngIf="level === 'admin'" class="dropdown-item" (click)="updateRoleModal(row.id)">Change Role</a>
+                                <a class="dropdown-item a-danger" (click)="removeUserModal(row.id, row.email, row.name)">Delete</a>
+                            </ng-template>
+                            <div class="vertical-align right-align" *ngIf="user.email !== row.email && !row.sudo.includes(user.groupId)">
+                                <app-dropdown *ngIf="(level === 'admin') || (level === 'division' && (row.sectionId.includes(sectionId) || row.subjectId.includes(subjectId))) && !row.loading" [template]="userMenu"></app-dropdown>
+                                <a class="tag" *ngIf="addToDivision && (!row.sectionId.includes(sectionId) && !row.subjectId.includes(subjectId)) && !row.loading" (click)="addUserToDivision(row.id)">+</a>
+                                <span *ngIf="addToDivision && (row.sectionId.includes(sectionId) || row.subjectId.includes(subjectId)) && !row.loading" class="icon has-text-success">
+                                    <fa-icon [icon]="faCheck" size="sm" class="fa-primary"></fa-icon>
+                                </span>
+                                <div *ngIf="row.loading" class="loader"></div>
+                            </div>
+                            <div class="content is-small">
+                                {{row.name}}
+                                <br *ngIf="row.name">{{row.email}}
+                                <br *ngIf="row.email">{{row.phone}}
+                                <br *ngIf="row.phone">{{row.role}}
+                            </div>
+                        </td>
+                    </ng-container>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    <tr class="mat-row" *matNoDataRow>
+                    <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+                    </tr>
+                </table>
+                <mat-paginator [pageSize]="5" [length]="tableData.data.length"></mat-paginator>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="selectedIndex === 1">
+    <button class="button is-dark" *ngIf="level === 'division'" [ngClass]="addToDivision ? 'is-success' : 'is-link is-outlined'" (click)="addToDivisionToggle()">
+        <span *ngIf="!addToDivision">Add users from group</span>
+        <span *ngIf="addToDivision">Show users in {{((section && section.sectionName) || (subject && subject.subjectName))}}</span>
+    </button>
+    <p *ngIf="level === 'division'"></p>
+</mat-dialog-actions>

@@ -1,0 +1,16 @@
+.card {
+    border-radius: 1em;
+}
+
+.title {
+    margin-bottom: 0;
+}
+
+.is-white:hover {
+    color: var(--primary-color);
+}
+
+img {
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+}

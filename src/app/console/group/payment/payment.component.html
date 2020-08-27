@@ -1,0 +1,59 @@
+<form [formGroup]="stripeForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <div class="is-size-7 has-text-link has-text-centered">A small amount may get deducted from your bank account. This amount will get refunded immediately.</div>
+        <div class="field">
+            <div class="control">
+                <input class="input" formControlName="name" type="text" placeholder="Name as in the card" required />
+            </div>
+        </div>
+        <div class="field" *ngIf="showEmail">
+            <div class="control">
+                <input class="input" formControlName="email" type="text" placeholder="email@example.com"/>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input" formControlName="line1" type="text" placeholder="Address line 1" required />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input" formControlName="line2" type="text" placeholder="Address line 2" required />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input" formControlName="city" type="text" placeholder="City" required />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input class="input" formControlName="state" type="text" placeholder="State" required />
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <div class="select is-link">
+                    <select formControlName="country" required>
+                        <option value="" [attr.selected]="true" hidden>Select Country</option>
+                        <option *ngFor="let country of countryList" value="{{country.code}}">{{country.name}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <ngx-stripe-card
+                    [options]="cardOptions"
+                    [elementsOptions]="elementsOptions">
+                </ngx-stripe-card>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button class="button is-pulled-right is-outlined is-link fa-primary-hover" type="submit" [ngClass]="loading ? 'is-loading' : ''">
+            <span class="icon is-small"><fa-icon [icon]="faLock" size="1x"></fa-icon></span>
+            <span>Add Card</span>
+        </button>
+    </mat-dialog-actions>
+</form>

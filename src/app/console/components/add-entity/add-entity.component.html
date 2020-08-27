@@ -1,0 +1,50 @@
+<form [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+  <h2 mat-dialog-title *ngIf="file">{{file.name}}</h2>
+  <mat-dialog-content>
+    <div class="container">
+      <div class="is-size-7 has-text-centered" *ngIf="!file">Supported formats: .mp4, .pdf, .jpg, .png</div>
+      <div class="card-image has-text-centered" *ngIf="file">
+        <img [src]="previewUrl" *ngIf="(fileType==='video' || fileType==='image') && previewUrl" class="column has-text-centered" class="previewUrl">
+        <div class="subtitle" *ngIf="fileType==='document'">{{file.name}}</div>
+        <a class="delete is-overlay is-medium" *ngIf="file" (click)="removeFile()"></a>
+      </div>
+      <br>
+      <div class="card-image" *ngIf="!file">
+        <div class="columns is-centered" appDragAndDrop (fileDropped)="onFileDropped($event)">
+          <div class="field is-centered">
+            <div class="file is-large is-boxed has-name is-centered">
+              <label class="file-label">
+                <input class="file-input" type="file" name="upload" (change)="onFileClicked($event)">
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <fa-icon [icon]="faFileUpload" size="lg" class="fa-primary"></fa-icon>
+                  </span>
+                </span>
+                <span class="file-name has-text-centered">
+                  {{file && file.name || 'Upload File'}}
+                </span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-content">
+        <progress class="progress" value="{{uploadProgress}}" max="100" *ngIf="uploadProgress > 0" [ngClass]="uploadProgress === 100 ? 'is-success' : 'is-link'"></progress>
+        <div class="field">
+          <div class="control">
+            <input class="input is-link" type="text" formControlName="title" placeholder="Title" required />
+          </div>
+        </div>
+        <div class="field">
+          <div class="control">
+            <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-dialog-close class="button is-dark is-link is-outlined">Cancel</button>
+    <button type="submit" cdkFocusInitial class="button is-dark is-link is-outlined" [ngClass]="{'is-loading': loading}">Create</button>
+  </mat-dialog-actions>
+</form>

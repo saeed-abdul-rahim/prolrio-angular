@@ -1,0 +1,32 @@
+<div class="section pad-bottom0 section-media">
+    <div *ngIf="entity && entity.contentType === 'video'" plyr class="has-text-centered" plyrTitle="{{entity.title}}" [plyrPlaysInline]="true" [plyrSources]="videoSources" (plyrInit)="player = $event" (plyrPlay)="play($event)" (plyrPlaying)="playing($event)" (plyrPause)="pause($event)" (plyrWaiting)="waiting($event)"></div>
+    <figure *ngIf="entity && entity.contentType === 'image'" class="has-text-centered">
+        <img src="{{entity.contentUrl}}">
+    </figure>
+    <div *ngIf="entity && entity.contentType ==='document'" class="has-text-centered">
+        <button class="button is-link is-dark is-large" (click)="getFile(entity.contentUrl)" [ngClass]="fileLoading ? 'is-loading' : ''">Download file</button>
+    </div>
+</div>
+<div class="section" *ngIf="entity">
+    <nav class="is-pulled-right">
+        <div class="columns is-mobile">
+            <div class="column" *ngIf="role === 'admin' || showEdit">
+                <button class="button is-link is-outlined is-small" (click)="editModal()">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+            </div>
+            <div class="column" *ngIf="previous">
+                <button class="button is-link is-outlined is-small" (click)="navigateToEntity(previous.id, previous.title)">
+                    <fa-icon [icon]="faArrowCircleLeft"></fa-icon>
+                </button>
+            </div>
+            <div class="column" *ngIf="next">
+                <button class="button is-link is-outlined is-small" (click)="navigateToEntity(next.id, next.title)">
+                    <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </nav>
+    <h2 class="title">{{entity && entity.title}}</h2>
+    <div class="content" [innerHTML]="entity && entity.description"></div>
+</div>

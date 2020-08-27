@@ -1,0 +1,13 @@
+<div class="section" *ngFor="let ds of displayEntities">
+    <div class="title is-4">{{ds.subjectName}}</div>
+    <div class="columns">
+        <div class="column is-3" *ngFor="let entity of ds.entities">
+            <app-card (click)="navigateToEntity(entity.id)"
+                [title]="entity.title"
+                [body]="entity.description"
+                [url]="entity.thumbnailImageUrl"
+                [contentType]="entity.contentType">
+            </app-card>
+        </div>
+    </div>
+</div>

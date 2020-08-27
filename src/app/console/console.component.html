@@ -1,0 +1,18 @@
+<div class="hero is-fullheight" *ngIf="loading">
+    <div class="hero-body is-vh-centered">
+        <div class="container">
+            <h1 class="title is-1 loader"></h1>
+        </div>
+    </div>
+</div>
+<div *ngIf="!loading">
+    <app-console-nav></app-console-nav>
+    <div class="section">
+        <div class="container">
+            <div [ngClass]="innerWidth <= 600 ? 'navbar is-fixed-top' : ''">
+                <app-breadcrumb></app-breadcrumb>
+            </div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

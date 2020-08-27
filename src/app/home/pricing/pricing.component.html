@@ -1,0 +1,77 @@
+<div class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="pricing-table is-comparative" *ngIf="tiers">
+        <div class="pricing-plan is-features">
+          <div class="plan-header">Features</div>
+          <div class="plan-price"><span class="plan-price-amount">&nbsp;</span></div>
+          <div class="plan-items">
+            <div class="plan-item">Institutions</div>
+            <div class="plan-item">Courses</div>
+            <div class="plan-item">Subjects</div>
+            <div class="plan-item">Users</div>
+            <div class="plan-item">Storage</div>
+          </div>
+          <div class="plan-footer">
+          </div>
+        </div>
+        <div class="pricing-plan" *ngIf="free">
+          <div class="plan-header">{{free.name}}</div>
+          <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">{{currencySymbol ? currencySymbol : '₹'}}</span>0</span></div>
+          <div class="plan-items">
+            <div class="plan-item" data-feature="Institutions">{{free.group.allowed}}</div>
+            <div class="plan-item" data-feature="Courses">{{free.section.allowed}}</div>
+            <div class="plan-item" data-feature="Subjects">{{free.subject.allowed}}</div>
+            <div class="plan-item" data-feature="Users">{{free.user.allowed}}</div>
+            <div class="plan-item" data-feature="Storage">{{free.storage.allowed}} GB</div>
+          </div>
+          <div class="plan-footer">
+            <button class="button is-fullwidth is-link" (click)="navigate()">Get started</button>
+          </div>
+        </div>
+        <div class="pricing-plan is-link" *ngIf="payAsYouGo">
+          <div class="plan-header">{{payAsYouGo.name}}</div>
+          <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency"></span>Variable</span></div>
+          <div class="plan-items" *ngIf="!exchangeRate">
+            <div class="plan-item" data-feature="Institutions">
+              Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.group.amount}} / institution
+            </div>
+            <div class="plan-item" data-feature="Courses">
+              Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.section.amount}} / section
+            </div>
+            <div class="plan-item" data-feature="Subjects">
+              Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.subject.amount}} / subject
+            </div>
+            <div class="plan-item" data-feature="Users">
+              Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.user.amount}} / user
+            </div>
+            <div class="plan-item" data-feature="Storage">
+              Free + <span class="plan-price-currency">INR </span>{{payAsYouGo.storage.amount}} / GB stored
+            </div>
+          </div>
+          <div class="plan-items" *ngIf="exchangeRate">
+            <div class="plan-item" data-feature="Institutions">
+              Free + <span class="plan-price-currency"></span>{{payAsYouGo.group.amount * exchangeRate | currency: currencyCode}} / institution
+            </div>
+            <div class="plan-item" data-feature="Courses">
+              Free + <span class="plan-price-currency"></span>{{payAsYouGo.section.amount * exchangeRate | currency: currencyCode}} / section
+            </div>
+            <div class="plan-item" data-feature="Subjects">
+              Free + <span class="plan-price-currency"></span>{{payAsYouGo.subject.amount * exchangeRate | currency: currencyCode}} / subject
+            </div>
+            <div class="plan-item" data-feature="Users">
+              Free + <span class="plan-price-currency"></span>{{payAsYouGo.user.amount * exchangeRate | currency: currencyCode}} / user
+            </div>
+            <div class="plan-item" data-feature="Storage">
+              Free + <span class="plan-price-currency"></span>{{payAsYouGo.storage.amount * exchangeRate | currency: currencyCode}} / GB stored
+            </div>
+          </div>
+          <div class="plan-footer">
+            <button class="button is-fullwidth is-link" (click)="navigate()">Get started</button>
+          </div>
+        </div>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>

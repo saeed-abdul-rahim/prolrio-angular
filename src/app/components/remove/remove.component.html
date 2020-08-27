@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content *ngIf="danger">
+    <div class="field">
+        <div class="control">
+            <label>Type "{{input}}" to {{buttonName}}</label>
+            <input class="input is-dark is-danger" type="text" placeholder="{{input}}" #removeInput (keyup)="inputVal(removeInput.value)" />
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-dialog-close class="button is-dark is-link is-outlined">Cancel</button>
+    <button cdkFocusInitial class="button is-dark is-danger is-outlined" (click)="remove()">{{buttonName}}</button>
+</mat-dialog-actions>

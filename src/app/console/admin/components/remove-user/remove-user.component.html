@@ -1,0 +1,14 @@
+<h2 mat-dialog-title *ngIf="sectionId || subjectId"> Remove {{name}} ?</h2>
+<h2 mat-dialog-title *ngIf="!sectionId && !subjectId"> Remove {{name}} from the group ?</h2>
+<mat-dialog-content *ngIf="sectionId === 'admin'">
+    <div class="field">
+        <div class="control">
+            <label>Type {{user}} to remove from group</label>
+            <input class="input is-dark is-danger" type="email" placeholder="{{user}}" #removeInput (keyup)="inputVal(removeInput.value)" />
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-dialog-close class="button is-dark is-link is-outlined">Cancel</button>
+    <button cdkFocusInitial class="button is-dark is-danger" [ngClass]="{'is-loading': loading}" (click)="removeUser()">Remove</button>
+</mat-dialog-actions>

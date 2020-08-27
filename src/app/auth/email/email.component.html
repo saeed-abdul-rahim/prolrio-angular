@@ -1,0 +1,22 @@
+<div class="content">
+    <form [formGroup]="emailForm" (ngSubmit)="onSubmit()" autocomplete="on">
+        <div class="field has-addons">
+            <p class="control" *ngIf="emailPhone === 'phone'">
+                <span class="select">
+                    <select formControlName="callCode" #selectedRole>
+                        <option *ngFor="let code of callingCodes" [attr.value]="code.callingCode" [attr.selected]="countryCode && countryCode === code.code ? true : null">{{code.callingCode}}</option>
+                    </select>
+                </span>
+            </p>
+            <p class="control">
+                <input class="input" formControlName="email" type="text" placeholder="Email / Phone" required (ngModelChange)="charOrNumber($event)">
+            </p>
+        </div>
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-fullwidth is-link" [ngClass]="{'is-loading': loading}">{{emailPhone === 'email' ? 'Sign In' : 'Send OTP'}}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="recaptcha-container" style="display: none;"></div>

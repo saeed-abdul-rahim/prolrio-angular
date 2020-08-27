@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "prolrio": {
+      "hosting": {
+        "prolrio": [
+          "prolrio"
+        ]
+      }
+    }
+  }
+}

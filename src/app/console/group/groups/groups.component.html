@@ -1,0 +1,37 @@
+<div class="title">Select Institution</div>
+<div class="subtitle is-5 has-text-centered" *ngIf="claims.length === 0">Join an Institution / start by creating an Institution from navigation bar</div>
+<section class="section" *ngIf="loading">
+    <span class="title is-1 loader"></span>
+</section>
+<div class="columns">
+    <div class="column is-full" *ngFor="let group of groups">
+        <div class="box box-btn" (click)="setClaim(group.id)">
+            <ng-template #groupMenu>
+                <a class="dropdown-item a-danger" *ngIf="isSudo(group.id)" (click)="removeGroupDialog(group.id)">Delete Group</a>
+                <a class="dropdown-item a-danger" *ngIf="!isSudo(group.id)" (click)="exitGroupDialog(group.id)">Exit Group</a>
+            </ng-template>
+            <app-dropdown [template]="groupMenu" *ngIf="!group.loading"></app-dropdown>
+            <div *ngIf="group.loading" class="loader is-pulled-right"></div>
+            <h6 class="title is-6">{{group.name}}</h6>
+            <h6 class="subtitle is-6">Institution ID: {{group.id}}</h6>
+            <h6 class="subtitle is-6">Created by: {{group.email || group.phone}}</h6>
+        </div>
+    </div>
+</div>
+<div class="title" *ngIf="groupsInvited && groupsInvited.length > 0">Pending Invitation</div>
+<div class="columns" *ngIf="groupsInvited && groupsInvited.length > 0">
+    <div class="column is-full" *ngFor="let group of groupsInvited">
+        <div class="box card box-btn">
+            <div class="card-content">
+                <h6 class="title is-6">{{group.name}}</h6>
+                <h6 class="subtitle is-6">Institution ID: {{group.id}}</h6>
+                <h6 class="subtitle is-6">Created by: {{group.email || group.phone}}</h6>
+            </div>
+            <footer class="card-footer">
+                <div *ngIf="group.loading" class="title loader"></div>
+                <button *ngIf="!group.loading" class="button button-card-footer card-footer-item has-text-danger" (click)="rejectRequest(group.id)">Reject</button>
+                <button *ngIf="!group.loading" class="button button-card-footer card-footer-item has-text-info" (click)="acceptRequest(group.id)">Accept</button>
+            </footer>
+        </div>
+    </div>
+</div>

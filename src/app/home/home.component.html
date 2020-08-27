@@ -1,0 +1,78 @@
+<nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation" (scroll)="onWindowScroll($event);" [ngClass]="navbarTransparent ? 'is-transparent' : ''">
+    <div class="navbar-brand">
+        <a class="navbar-item logo margin-bottom0" routerLink="">
+          <img src="{{themeLogo}}" alt="PROLR: Better Learning" width="28" height="28">&nbsp;
+          {{logoText}}
+        </a>
+        <a class="navbar-burger burger" data-target="signIn" aria-label="menu" aria-expanded="false" [ngClass]="burger ? 'is-active' : ''" (click)="toggleBurger()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+    </div>
+    <div id="signIn" class="navbar-menu" [ngClass]="burger ? 'is-active' : ''">
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="field margin-bottom0">
+                    <p class="control margin-bottom0" routerLink="/support">
+                        <button class="button btn-theme is-transparent has-text-link">
+                            <span>Support</span>
+                        </button>
+                    </p>
+                </div>
+                <div class="field margin-bottom0">
+                    <p class="control margin-bottom0" routerLink="/pricing">
+                        <button class="button btn-theme is-transparent has-text-link">
+                            <span>Pricing</span>
+                        </button>
+                    </p>
+                </div>
+                <div class="field is-grouped">
+                    <p class="control margin0" (click)="toggleTheme()">
+                        <a class="button btn-theme is-transparent"><fa-icon [icon]="themeIcon" size="lg" class="fa-primary"></fa-icon></a>
+                    </p>
+                    <p class="control margin-bottom0" routerLink="/auth">
+                        <button class="button is-link is-outlined">
+                            <span>Console</span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<router-outlet></router-outlet>
+<footer class="footer hero">
+    <div class="hero-body pad-top0">
+        <div class="columns">
+            <div class="column is-3">
+                <ul>
+                    <li class="logo align-left">{{logoText}}</li>
+                </ul>
+            </div>
+            <div class="column is-7">
+                
+            </div>
+            <div class="column is-2">
+                <ul>
+                    <li class="title">
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <a class="is-link" (click)="goToLink('https://fb.me/prolr.io')"><fa-icon [icon]="faFacebook" size="2x"></fa-icon></a>
+                            </div>
+                            <div class="control">
+                                <a class="is-link" (click)="goToLink('https://www.instagram.com/prolr.io')"><fa-icon [icon]="faInstagram" size="2x"></fa-icon></a>
+                            </div>
+                            <div class="control">
+                                <a class="is-link" (click)="goToLink('https://twitter.com/IoProlr')"><fa-icon [icon]="faTwitter" size="2x"></fa-icon></a>
+                            </div>
+                            <div class="control">
+                                <a class="is-link" (click)="goToLink('https://www.linkedin.com/company/prolr-io')"><fa-icon [icon]="faLinkedin" size="2x"></fa-icon></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

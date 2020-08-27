@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="title">Join Institution</div>
+    <div class="card">
+        <form [formGroup]="groupForm" (ngSubmit)="onSubmit()">
+            <div class="card-content">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" formControlName="id" type="text" placeholder="Institution ID">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="button is-dark is-link is-outlined" [ngClass]="{'is-loading': loading}">Send Request</button>
+            </div>
+        </form>
+    </div>
+    <br>
+</div>
+<section class="container">
+        <div class="columns is-desktop">
+            <div class="column" *ngFor="let request of requests">
+                <div class="box">
+                    <ng-template #requestsMenu>
+                        <a class="dropdown-item" (click)="cancelRequest(request.id)">Cancel Request</a>
+                    </ng-template>
+                    <app-dropdown [template]="requestsMenu"></app-dropdown>
+                    {{ request.id }}
+                </div>
+            </div>
+        </div>
+</section>

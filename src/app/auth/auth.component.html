@@ -1,0 +1,17 @@
+<div class="hero is-fullheight">
+    <div class="hero-body is-vh-centered">
+        <h1 class="title is-1 loader" *ngIf="loading"></h1>
+        <div class="box card" *ngIf="!loading">
+            <div class="card-image is-flex is-horizontal-center">
+                <figure class="image is-64x64">
+                    <a routerLink="">
+                        <img src="assets/icons/icon-152x152.png" alt="PROLR">
+                    </a>
+                </figure>
+              </div>
+            <div class="card-content">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<nav class="breadcrumb vertical-align" aria-label="breadcrumbs">
+    <ul>
+        <li *ngFor="let url of urls; last as isLast" [ngClass]="isLast ? 'is-active' : ''">
+            <a (click)="navigateUrl(url.label, url.url)" >{{url.label}}</a>
+        </li>
+    </ul>
+</nav>

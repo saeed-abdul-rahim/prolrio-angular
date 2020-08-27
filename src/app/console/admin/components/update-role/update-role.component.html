@@ -1,0 +1,20 @@
+<form [formGroup]="updateRoleForm" (ngSubmit)="onUpdateRoleSubmit()">
+    <mat-dialog-content>
+        <div class="field">
+            <div class="control">
+                <div class="select is-link">
+                    <select formControlName="role" required>
+                        <option value="none" [attr.selected]="true">Select Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="provider">Teacher</option>
+                        <option value="learner">Student</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-dialog-close class="button is-dark is-link is-outlined">Cancel</button>
+        <button type="submit" cdkFocusInitial class="button is-dark is-link is-outlined" [ngClass]="{'is-loading': loading}">Update</button>
+    </mat-dialog-actions>
+</form>
