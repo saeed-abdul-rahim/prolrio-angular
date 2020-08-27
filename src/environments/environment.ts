@@ -9,7 +9,7 @@ export const environment = {
   localStorageKey: 'oTM680-1SL5f2ecf06iDyLSMT6iDYm62d7bc',
   stripeKey: 'pk_test_51HBzfQDqIzvTueD2C7EqTEwscinYXsvEPvvftgeRP6gvbutfYiso9KVp7cKYgauKNkU0NsluxJmitGTlQsKS4Ggs008cbImU8W',
   api: {
-    url: 'https://asia-east2-prolrio.cloudfunctions.net/api/v1',
+    url: 'https://asia-east2-prolrio-dev.cloudfunctions.net/api/v1',
     _user: '/user',
     _group: '/group',
     _request: '/request',
