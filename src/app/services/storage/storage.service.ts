@@ -3,6 +3,7 @@ import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask 
 import { User } from '@models/User';
 import { AuthService } from '@core/auth.service';
 import { Observable } from 'rxjs';
+import { ContentType } from '@models/Entity';
 
 @Injectable({
   providedIn: 'root'
@@ -29,10 +30,15 @@ export class StorageService {
     this.auth.getCurrentUserStream().subscribe(user => this.user = user);
   }
 
-  upload(file: File, fileType: string, thumbnailFile: Blob = null) {
+  upload(file: File, fileType: ContentType, thumbnailFile: Blob = null, type: 'group' | 'user' = 'group') {
     const randomId = Math.random().toString(36).substring(2);
-    const { groupId } = this.user;
-    const location = `${groupId}/${fileType}/`;
+    const { groupId, uid } = this.user;
+    let location: string;
+    if (type === 'group') {
+      location = `${groupId}/${fileType}/`;
+    } else {
+      location = `${uid}/${fileType}/`;
+    }
     this.fileName = randomId + file.name;
     this.thumbnailName = `thumb_${this.fileName}.png`;
     const fileLocation = location + this.fileName;

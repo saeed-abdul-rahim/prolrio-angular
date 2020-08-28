@@ -48,6 +48,7 @@ export interface UserInterface extends CommonInterface {
     [key: string]: any;
 }
 
+export const genders: Gender[] = [ 'Male', 'Female', 'Transgender' ];
 export const roles: Role[] = [ 'admin', 'provider', 'learner' ];
 export const displayRoles: DisplayRole[] = [ 'Admin', 'Teacher', 'Student' ];
 export const displayRoleMap: Record<Role, DisplayRole> = {

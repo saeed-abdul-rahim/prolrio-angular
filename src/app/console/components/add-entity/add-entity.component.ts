@@ -169,7 +169,7 @@ export class AddEntityComponent implements OnInit, OnDestroy {
     this.uploadProgressSubscription = this.storage.getUploadProgress().subscribe(
       progress => this.uploadProgress = progress,
       () => {
-        this.submitResponse('Error: Unable to upload file');
+        this.submitResponse('Unable to upload file');
       },
       () => this.downloadURLSubscription = this.storage.getDownloadURL().subscribe(async url => {
           if (this.previewUrl) {
@@ -179,7 +179,7 @@ export class AddEntityComponent implements OnInit, OnDestroy {
             },
             async () => {
               await this.createRecord(title.value, description.value, this.storage.fileName, url);
-              this.submitResponse('Error: Unable to create thumbnail');
+              this.submitResponse('Unable to create thumbnail');
             });
           } else {
             await this.createRecord(title.value, description.value, this.storage.fileName, url);
@@ -187,7 +187,7 @@ export class AddEntityComponent implements OnInit, OnDestroy {
           }
         },
         () => {
-          this.submitResponse('Error: Unable to image Url');
+          this.submitResponse('Unable to get image Url');
         }
       )
     );

@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import imageCompression from 'browser-image-compression';
 import Thumbnail from './Thumbnail';
+import { Observable, Observer } from 'rxjs';
 
 @Injectable()
 export class MediaService {
@@ -60,6 +61,46 @@ export class MediaService {
     const blob = await imageCompression(imageFile, options);
     const url = await imageCompression.getDataUrlFromFile(blob);
     return { url, blob };
+  }
+
+  createBlobImageFile(url: string): void {
+    this.dataURItoBlob(url).subscribe((blob: Blob) => {
+      const imageBlob: Blob = blob;
+      const imageName: string = this.generateName();
+      const imageFile: File = new File([imageBlob], imageName, {
+        type: this.thumbnailType
+      });
+      return window.URL.createObjectURL(imageFile);
+    });
+  }
+
+    /* Method to convert Base64Data Url as Image Blob */
+  dataURItoBlob(dataURI: string): Observable<Blob> {
+    return new Observable((observer: Observer<Blob>) => {
+      const byteString: string = window.atob(dataURI.replace(/^data:image\/(png|jpeg|jpg);base64,/, ''));
+      const arrayBuffer: ArrayBuffer = new ArrayBuffer(byteString.length);
+      const int8Array: Uint8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        int8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([int8Array], { type: this.thumbnailType });
+      observer.next(blob);
+      observer.complete();
+    });
+  }
+
+  generateName(): string {
+    const date: number = new Date().valueOf();
+    let text = '';
+    const possibleText =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 5; i++) {
+      text += possibleText.charAt(
+        Math.floor(Math.random() * possibleText.length)
+      );
+    }
+    // Replace extension according to your media type like this
+    return date + '.' + text + '.png';
   }
 
 }
