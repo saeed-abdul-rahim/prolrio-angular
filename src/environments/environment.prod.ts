@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
   name: 'PROLR',
-  url: 'https://prolr.io',
+  url: 'https://prolrio-dev.web.app/',
   localStorageKey: 'oTM680-1SL5f2ecf06iDyLSMT6iDYm62d7bc',
-  stripeKey: 'pk_live_51HBzfQDqIzvTueD2MYXtv0ndPAvALyjuIRm1hkgVNxzurPWO0zFGXCI6CxArX5GkWyRTwyquEiHE3RQ4c8oqkgDe00twcZy4kW',
+  stripeKey: 'pk_test_51HBzfQDqIzvTueD2C7EqTEwscinYXsvEPvvftgeRP6gvbutfYiso9KVp7cKYgauKNkU0NsluxJmitGTlQsKS4Ggs008cbImU8W',
   api: {
     url: 'https://asia-east2-prolrio-dev.cloudfunctions.net/api/v1',
     _user: '/user',
