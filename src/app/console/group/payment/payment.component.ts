@@ -118,10 +118,12 @@ export class PaymentComponent implements OnInit, OnDestroy {
         if (intent.error) {
           this.openSnackBar(intent.error.message);
         } else {
-          try {
-            await this.group.updateUser({ email: email.value });
-          } catch (_) {
-            this.openSnackBar('Unable to save email. Please update your email in profile to recieve payment related messages');
+          if (this.showEmail) {
+            try {
+              await this.group.updateUser({ email: email.value });
+            } catch (_) {
+              this.openSnackBar('Unable to save email. Please update your email in profile to recieve payment related messages');
+            }
           }
           this.dialogRef.close(true);
         }
