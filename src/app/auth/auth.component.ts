@@ -48,20 +48,24 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.user = user;
         if (user) {
           try {
-            const { email } = user;
-            const signInEmail = await this.auth.fetchEmail(email);
-            if (signInEmail.includes('password')) {
-              const loggedIn = await this.auth.isLoggedIn();
-              if (loggedIn) {
-                this.router.navigate(['console']);
-              } else {
-                this.router.navigate([this.location], this.routerConfig);
+            const { providerData } = await this.auth.getAfsCurrentUser();
+            const providers = providerData.map(p => p.providerId);
+            if (!providers.includes('phone')) {
+              const { email } = user;
+              const signInEmail = await this.auth.fetchEmail(email);
+              if (signInEmail.includes('password')) {
+                const loggedIn = await this.auth.isLoggedIn();
+                if (loggedIn) {
+                  this.router.navigate(['console']);
+                } else {
+                  this.router.navigate([this.location], this.routerConfig);
+                }
               }
-            }
-            else if (signInEmail.includes('emailLink')) {
-              this.router.navigateByUrl(`${this.location}/set-password?mode=signIn`);
-            } else {
-              this.router.navigate(['console']);
+              else if (signInEmail.includes('emailLink')) {
+                this.router.navigateByUrl(`${this.location}/set-password?mode=signIn`);
+              } else {
+                this.router.navigate(['console']);
+              }
             }
           } catch (err) {
             this.openSnackBar(err);

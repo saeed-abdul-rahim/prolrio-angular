@@ -340,6 +340,10 @@ is-centered-vertical {
     transition: var(--transition-speed-sm);
 }
 
+.card-footer {
+    border-top: 1px solid var(--bg-primary);
+}
+
 .box-btn:hover {
     transform: translate(0, -0.3em);
 }

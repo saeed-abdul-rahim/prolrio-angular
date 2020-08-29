@@ -20,7 +20,8 @@ export class CreateComponent implements OnInit {
   loading: boolean;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService,
-              private group: GroupService, private snackBar: MatSnackBar, private matDialog: MatDialog, private analytics: AngularFireAnalytics) {
+              private group: GroupService, private snackBar: MatSnackBar,
+              private matDialog: MatDialog, private analytics: AngularFireAnalytics) {
     this.groupForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('[A-z\\s]+')]],
       id: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(15), Validators.pattern('[A-z0-9-]+')]]
@@ -72,6 +73,10 @@ export class CreateComponent implements OnInit {
     }
     this.loading = false;
 
+  }
+
+  navSelectTier() {
+    this.router.navigateByUrl(`console/group/tier`);
   }
 
 }

@@ -58,7 +58,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
     this.userDocSubscription = this.auth.getCurrentUserDocument().subscribe(user => {
       this.loading = true;
       setTimeout(() => {
-        if (user.groupId.length > 0 && (!this.user.allClaims || this.user.allClaims?.length === 0)) {
+        if (user.groupId.length > 0 && this.user && (!this.user.allClaims || this.user.allClaims?.length === 0)) {
           this.auth.getUser();
         } else if (this.user.allClaims) {
           const { allClaims } = this.user;
