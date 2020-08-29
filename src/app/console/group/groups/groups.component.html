@@ -1,5 +1,4 @@
-<div class="title">Select Institution</div>
-<div class="subtitle is-5 has-text-centered" *ngIf="claims.length === 0">Join an Institution / start by creating an Institution from navigation bar</div>
+<div class="title is-4" *ngIf="claims.length > 0">Select Institution</div>
 <section class="section" *ngIf="loading">
     <span class="title is-1 loader"></span>
 </section>
@@ -18,7 +17,7 @@
         </div>
     </div>
 </div>
-<div class="title" *ngIf="groupsInvited && groupsInvited.length > 0">Pending Invitation</div>
+<div class="title is-4" *ngIf="groupsInvited && groupsInvited.length > 0">Pending Invitation</div>
 <div class="columns" *ngIf="groupsInvited && groupsInvited.length > 0">
     <div class="column is-full" *ngFor="let group of groupsInvited">
         <div class="box card box-btn">
@@ -35,3 +34,4 @@
         </div>
     </div>
 </div>
+<app-join></app-join>

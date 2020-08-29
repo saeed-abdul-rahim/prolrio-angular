@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd} from '@angular/router';
-import { ConsoleNavService } from '@services/console-nav/console-nav.service';
 import { AuthService } from '@core/auth.service';
 import { Subscription } from 'rxjs';
 import localStorageHelper from '@utils/localStorageHelper';
@@ -24,7 +23,7 @@ export class ConsoleComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   routerSubscription: Subscription;
 
-  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute, private consoleNav: ConsoleNavService) {
+  constructor(private auth: AuthService, private router: Router, private route: ActivatedRoute) {
     this.routerSubscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => this.currentUrl = event.url);
@@ -49,36 +48,31 @@ export class ConsoleComponent implements OnInit, OnDestroy {
       }
       this.userSubscription = user$.subscribe(user => {
         if (!user) {
-          this.router.navigate(['/auth']);
+          this.router.navigate(['auth']);
           return;
         }
-        this.user = user;
-        const { role, token, groupId, allClaims } = user;
+        if (!this.user) {
+          this.user = user;
+        } else {
+          return;
+        }
+        const { token, allClaims } = user;
         const { localStorageKey } = environment;
         const { current } = localStorageHelper.getItem(localStorageKey);
         if (!token) {
           this.router.navigate(['/auth']);
-        } else if (role && ['admin', 'provider', 'learner'].includes(role)) {
-          this.consoleNav.setUrl([{
-            label: 'Home',
-            url: `console/${role}`
-          }]);
-          this.router.navigate([role], this.routeConfig);
         } else if (current && allClaims) {
           try {
             const claim = allClaims.find(c => c.groupId === window.atob(current));
             if (claim) {
               this.auth.setGroup(claim);
-            } else {
-              this.router.navigate(['group'], this.routeConfig);
             }
+            this.router.navigate(['group'], this.routeConfig);
           } catch (err) {
             this.router.navigate(['group'], this.routeConfig);
           }
-        } else if (!groupId || allClaims) {
-          this.router.navigate(['group'], this.routeConfig);
         } else {
-          this.router.navigate(['auth']);
+          this.router.navigate(['group'], this.routeConfig);
         }
         this.loading = false;
       });

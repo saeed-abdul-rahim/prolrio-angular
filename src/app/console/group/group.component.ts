@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import { faUniversity } from '@fortawesome/free-solid-svg-icons/faUniversity';
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
-import { faUsers } from '@fortawesome/free-solid-svg-icons/faUsers';
-import { faUsersCog } from '@fortawesome/free-solid-svg-icons/faUsersCog';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons/faCreditCard';
 import { ConsoleNavService } from '@services/console-nav/console-nav.service';
 import { Router } from '@angular/router';
+import { AuthService } from '@core/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-group',
@@ -16,21 +17,40 @@ export class GroupComponent implements OnInit, OnDestroy {
 
   location = 'console/group';
 
-  constructor(private consoleNav: ConsoleNavService, private router: Router) {
+  navItems = [
+    { text: 'Profile', icon: faUser, function: () => this.navProfile() },
+    { text: 'Institution', icon: faUniversity, function: () => this.navSelectGroup() },
+    { text: 'Create Institution', icon: faPlus, function: () => this.navCreateGroup() }
+  ];
+
+  navBill = { text: 'Billing', icon: faCreditCard, function: () => this.navSelectTier() };
+
+  userSubscription: Subscription;
+
+  constructor(private consoleNav: ConsoleNavService, private router: Router, private auth: AuthService) {
+    this.userSubscription = this.auth.getCurrentUserStream().subscribe(user => {
+      if (user) {
+        if (user.allClaims) {
+          const { allClaims } = user;
+          const groupCreator = allClaims.filter(claims => claims.sudo === true);
+          const currNavItems = this.navItems.map(nav => nav.text);
+          if (groupCreator.length > 0 && !currNavItems.includes('Billing')) {
+            this.navItems.push(this.navBill);
+            this.consoleNav.setNavItems(this.navItems);
+          }
+        }
+      }
+    });
   }
 
   ngOnInit(): void {
-    const navItems = [
-      { text: 'Profile', icon: faUser, function: () => this.navProfile() },
-      { text: 'Select Institution', icon: faUsersCog, function: () => this.navSelectGroup() },
-      { text: 'Join Institution', icon: faUsers, function: () => this.navJoinGroup() },
-      { text: 'Create Institution', icon: faPlus, function: () => this.navCreateGroup() },
-      { text: 'Select Tier', icon: faCreditCard, function: () => this.navSelectTier() }
-    ];
-    this.consoleNav.setNavItems(navItems);
+    this.consoleNav.setNavItems(this.navItems);
   }
 
   ngOnDestroy(): void {
+    if (this.userSubscription && !this.userSubscription.closed) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   navProfile() {
@@ -39,10 +59,6 @@ export class GroupComponent implements OnInit, OnDestroy {
 
   navSelectGroup() {
     this.router.navigateByUrl(this.location);
-  }
-
-  navJoinGroup() {
-    this.router.navigateByUrl(`${this.location}/join`);
   }
 
   navCreateGroup() {
