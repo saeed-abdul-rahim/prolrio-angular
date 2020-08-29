@@ -356,6 +356,10 @@ body .mat-typography, .mat-body, .mat-body-1, .mat-typography, .mat-dialog-title
     font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
 }
 
+.mat-calendar-table-header th {
+    text-align: center !important;
+}
+
 .title {
     line-height: 1.125 !important;
 }

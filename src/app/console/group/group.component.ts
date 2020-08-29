@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons/faPlus';
+import { faUser } from '@fortawesome/free-solid-svg-icons/faUser';
 import { faUsers } from '@fortawesome/free-solid-svg-icons/faUsers';
 import { faUsersCog } from '@fortawesome/free-solid-svg-icons/faUsersCog';
 import { faCreditCard } from '@fortawesome/free-solid-svg-icons/faCreditCard';
@@ -14,13 +15,13 @@ import { Router } from '@angular/router';
 export class GroupComponent implements OnInit, OnDestroy {
 
   location = 'console/group';
-  routeConfig = { skipLocationChange: true };
 
   constructor(private consoleNav: ConsoleNavService, private router: Router) {
   }
 
   ngOnInit(): void {
     const navItems = [
+      { text: 'Profile', icon: faUser, function: () => this.navProfile() },
       { text: 'Select Institution', icon: faUsersCog, function: () => this.navSelectGroup() },
       { text: 'Join Institution', icon: faUsers, function: () => this.navJoinGroup() },
       { text: 'Create Institution', icon: faPlus, function: () => this.navCreateGroup() },
@@ -32,20 +33,24 @@ export class GroupComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
   }
 
+  navProfile() {
+    this.router.navigateByUrl(`${this.location}/profile`);
+  }
+
   navSelectGroup() {
-    this.router.navigateByUrl(this.location, this.routeConfig);
+    this.router.navigateByUrl(this.location);
   }
 
   navJoinGroup() {
-    this.router.navigateByUrl(`${this.location}/join`, this.routeConfig);
+    this.router.navigateByUrl(`${this.location}/join`);
   }
 
   navCreateGroup() {
-    this.router.navigateByUrl(`${this.location}/create`, this.routeConfig);
+    this.router.navigateByUrl(`${this.location}/create`);
   }
 
   navSelectTier() {
-    this.router.navigateByUrl(`${this.location}/tier`, this.routeConfig);
+    this.router.navigateByUrl(`${this.location}/tier`);
   }
 
 }
