@@ -35,6 +35,7 @@ import { ProviderService } from '@services/provider/provider.service';
 import { UpdateDivisionComponent } from './components/update-division/update-division.component';
 import { GroupService } from '@services/group/group.service';
 import { AnalyticsComponent } from '../components/analytics/analytics.component';
+import { EarningsComponent } from './components/earnings/earnings.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { AnalyticsComponent } from '../components/analytics/analytics.component'
     RemoveEntityComponent,
     EditEntityComponent,
     UpdateDivisionComponent,
-    AnalyticsComponent
+    AnalyticsComponent,
+    EarningsComponent
   ],
   imports: [
     CommonModule,

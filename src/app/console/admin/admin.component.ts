@@ -6,6 +6,7 @@ import { faFileUpload } from '@fortawesome/free-solid-svg-icons/faFileUpload';
 import { faUsersCog } from '@fortawesome/free-solid-svg-icons/faUsersCog';
 import { faCog } from '@fortawesome/free-solid-svg-icons/faCog';
 import { faChartPie } from '@fortawesome/free-solid-svg-icons/faChartPie';
+import { faMoneyBillWave } from '@fortawesome/free-solid-svg-icons/faMoneyBillWave';
 import { ConsoleNavService } from '@services/console-nav/console-nav.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -21,6 +22,7 @@ import { MetadataInterface } from '@models/Metadata';
 import { AuthService } from '@core/auth.service';
 import { AdminService } from '@services/admin/admin.service';
 import { AnalyticsComponent } from '../components/analytics/analytics.component';
+import { EarningsComponent } from './components/earnings/earnings.component';
 
 
 @Component({
@@ -52,6 +54,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   navAddEntity = { text: 'Add Content', icon: faFileUpload, function: () => this.entityCreateDialog(this.subjectId) };
   navSettings = { text: 'Settings', icon: faCog, function: () => this.settings() };
   navAnalytics = { text: 'Analytics', icon: faChartPie, function: () => this.showAnalytics() };
+  navEarnings = { text: 'Earnings', icon: faMoneyBillWave, function: () => this.earningsDialog() };
 
   constructor(private router: Router, private consoleNav: ConsoleNavService, private matDialog: MatDialog,
               private common: CommonService, private auth: AuthService, private admin: AdminService) {
@@ -148,8 +151,12 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.matDialog.open(AddEntityComponent, dialogConfig);
   }
 
+  earningsDialog() {
+    this.matDialog.open(EarningsComponent);
+  }
+
   setDefaultNavItems() {
-    this.navItems = [ this.navHome, this.navSettings ];
+    this.navItems = [ this.navHome, this.navEarnings, this.navSettings ];
   }
 
   navItemsWhenInEntity() {

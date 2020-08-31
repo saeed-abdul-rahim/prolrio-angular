@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Earnings</h2>
+<form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+        <div class="columns">
+            <div class="column">
+                <div class="box box-shadow">
+                    Current Earning<h2 class="title">$0</h2>
+                </div>
+            </div>
+            <div class="column">
+                <div class="box box-shadow">
+                    Current Amount<h2 class="title">$0</h2>
+                </div>
+            </div>
+        </div>
+        <h2 class="title">Update student payment</h2>
+        <div class="field is-size-7 has-text-danger">
+            Recurring payment updation doesn't effect old students
+        </div>
+        <div class="field">
+            <div class="control">
+                <div class="select is-link">
+                    <select formControlName="type" required>
+                        <option value="one-time" [attr.selected]="true">One Time</option>
+                        <option value="recurring">Recurring</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <input formControlName="price" class="input" type="text" placeholder="Enter Amount">
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-dialog-close class="button is-dark is-link is-outlined">Cancel</button>
+        <button type="submit" cdkFocusInitial class="button is-dark is-link" [ngClass]="{'is-loading': loading}">Update</button>
+    </mat-dialog-actions>
+</form>
