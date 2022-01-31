@@ -1,5 +1,28 @@
 # Prolrio
 
+<img width="1792" alt="prolr e learning app with firebase and angular" src="https://user-images.githubusercontent.com/27133878/151811110-f2ef8647-0ed7-4f44-8e7f-4661d91dc0dd.png">
+
+## Create courses and subjects
+Courses are much like folders where you can create it in infinite depth and subjects are containers of your content
+
+## Manage users and roles
+There are 3 types of roles:
+Admin, Teacher & Student
+Admins can create courses, subjects and content and manage permissions to them.
+Teachers are only allowed to create content to their respective subjects.
+Students are only allowed to see that the admins have given access to.
+
+## Share content and get realtime analytics
+Students get access to your content as soon as you post them and you'll get to know the analytics.
+
+## Subscription
+Prolr payments are by Stripe Subscription.
+
+## Functions 
+Backend is available [here](https://github.com/saeed-abdul-rahim/prolrio-backend)
+
+# Development
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
 
 ## Development server
