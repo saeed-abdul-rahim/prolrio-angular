@@ -1,4 +1,4 @@
-# Prolrio
+# Prolrio - Online Learning platform with Angular Firebase, Bulma and Stripe Subscriptions
 
 <img width="1792" alt="prolr e learning app with firebase and angular" src="https://user-images.githubusercontent.com/27133878/151811110-f2ef8647-0ed7-4f44-8e7f-4661d91dc0dd.png">
 
